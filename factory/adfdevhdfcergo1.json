@@ -1,0 +1,9 @@
+{
+	"name": "adfdevhdfcergo1",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "14df4e3f-d0d6-41c3-9a14-6ddc290cf89f",
+		"tenantId": "f8d3b75a-40b2-4185-a553-4e2ead7eaa68"
+	}
+}

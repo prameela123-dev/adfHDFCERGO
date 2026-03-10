@@ -1,0 +1,21 @@
+{
+	"name": "ls_sqlsink",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sqlhdfcergo.database.windows.net",
+			"database": "free-sql-db-2035863",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "cloud123",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmZDA5NTIyYy00N2RhLTRjZTAtYjlmNy0wNzE1ZDM3YzU3MjQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"name": "DS_sqlsink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sqlsink",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sqldatabase": {
+				"type": "string"
+			},
+			"sqltablename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().sqldatabase",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().sqltablename",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

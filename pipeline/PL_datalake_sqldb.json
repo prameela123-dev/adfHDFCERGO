@@ -1,0 +1,115 @@
+{
+	"name": "PL_datalake_sqldb",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy from datalake to sqldb",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"EmployeeID"
+							]
+						},
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_datalakeparametersource",
+						"type": "DatasetReference",
+						"parameters": {
+							"sourcecontainer": {
+								"value": "@pipeline().parameters.sourcecontainer",
+								"type": "Expression"
+							},
+							"sourcedatalake": {
+								"value": "@pipeline().parameters.sourcedatalake",
+								"type": "Expression"
+							},
+							"sorcefile": {
+								"value": "@pipeline().parameters.sourcefile",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_sqlsink",
+						"type": "DatasetReference",
+						"parameters": {
+							"sqldatabase": {
+								"value": "@pipeline().parameters.sqldatabase",
+								"type": "Expression"
+							},
+							"sqltablename": {
+								"value": "@pipeline().parameters.sqltablename",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"sourcecontainer": {
+				"type": "string",
+				"defaultValue": "mycontainer"
+			},
+			"sourcedatalake": {
+				"type": "string",
+				"defaultValue": "input"
+			},
+			"sourcefile": {
+				"type": "string",
+				"defaultValue": "employee_data.csv"
+			},
+			"sqldatabase": {
+				"type": "string",
+				"defaultValue": "dbo"
+			},
+			"sqltablename": {
+				"type": "string",
+				"defaultValue": "employee_data2"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-05T04:12:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
